@@ -14,5 +14,10 @@
         "rjkip/ftp-php": "^1.1",
         "guzzlehttp/guzzle": "^6.3",
         "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "FtpInstaller\\": "src/"
+        }
     }
 }
