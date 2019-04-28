@@ -73,8 +73,8 @@ class FtpInstaller
     }
 
     protected function xcopy($src, $dest) {
-        if(! is_dir($src))
-            mkdir($src);
+        if(! is_dir($dest))
+            mkdir($dest);
         foreach (scandir($src) as $file) {
             if (!is_readable($src . '/' . $file)) continue;
             if (is_dir($src .'/' . $file) && ($file != '.') && ($file != '..') ) {
