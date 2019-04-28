@@ -11,6 +11,13 @@ namespace FtpInstaller;
 class Configurations
 {
     /**
+     * @return string
+     */
+    public function getHttpAddress(): string
+    {
+        return $this->http_address;
+    }
+    /**
      * @var string address of the ftp server
      */
     protected $ftp_address;
@@ -42,7 +49,7 @@ class Configurations
      * @var string directory where the software is
      */
     protected $directory;
-
+    protected $http_address;
     /**
      * Configurations constructor.
      * @param $ftp_address string address of the ftp server
@@ -54,7 +61,7 @@ class Configurations
      * @param $database_password string password for the database server
      * @param $directory string directory where the software is
      */
-    public function __construct(string $ftp_address, string $ftp_username, string $ftp_password, string $database_name, string $database_address, string $database_username, string $database_password, string $directory)
+    public function __construct(string $ftp_address, string $ftp_username, string $ftp_password, string $database_name, string $database_address, string $database_username, string $database_password, string $directory, string $http_address)
     {
         $this->ftp_address = $ftp_address;
         $this->ftp_username = $ftp_username;
@@ -64,6 +71,7 @@ class Configurations
         $this->database_username = $database_username;
         $this->database_password = $database_password;
         $this->directory = $directory;
+        $this->http_address = $http_address;
     }
 
     /**

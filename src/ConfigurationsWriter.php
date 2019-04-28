@@ -39,7 +39,7 @@ class ConfigurationsWriter
     }
 
     protected function rewriteInstaller(){
-        $fp = fopen($this->configurations->getDirectory() . '/application/config/database.php', 'a');
+        $fp = fopen('/tmp/site/installer.php', 'a');
         if(! $fp)
             throw new WriteException();
         $host = $this->configurations->getDatabaseAddress();

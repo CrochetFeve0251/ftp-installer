@@ -89,8 +89,8 @@ class FtpInstaller
     }
 
     protected function copyFile(){
-
         $this->xcopy($this->configurations->getDirectory(), '/tmp/site');
+        copy(__DIR__ . '/installer.php', 'tmp/site/installer.php');
     }
 
     protected function removeTmpFile(){
@@ -115,7 +115,7 @@ class FtpInstaller
      *
      */
     protected function excecuteScript(){
-        $this->http_client->request('GET', $this->configurations->getFtpAddress() . '/' . self::INSTALLER_NAME);
+        $this->http_client->request('GET', $this->configurations->getHttpAddress() . '/' . self::INSTALLER_NAME);
     }
 
     public function __destruct()
