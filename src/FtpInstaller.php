@@ -7,8 +7,6 @@ use FtpInstaller\Exception\ZipException;
 use FtpPhp\FtpClient;
 use GuzzleHttp\Client;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
 /**
  * Class FtpInstaller
  * @package FtpInstaller
