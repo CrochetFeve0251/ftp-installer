@@ -58,6 +58,7 @@ class FtpInstaller
         $this->zip();
         $this->transfer();
         $this->excecuteScript();
+        $this->removeTmpFile();
     }
 
     /**
@@ -72,19 +73,28 @@ class FtpInstaller
     }
 
     protected function xcopy($src, $dest) {
+        if(! is_dir($src))
+            mkdir($src);
         foreach (scandir($src) as $file) {
             if (!is_readable($src . '/' . $file)) continue;
             if (is_dir($src .'/' . $file) && ($file != '.') && ($file != '..') ) {
                 mkdir($dest . '/' . $file);
                 $this->xcopy($src . '/' . $file, $dest . '/' . $file);
             } else {
+                if($file == '.' || $file == '..')
+                    continue;
                 copy($src . '/' . $file, $dest . '/' . $file);
             }
         }
     }
 
     protected function copyFile(){
+
         $this->xcopy($this->configurations->getDirectory(), '/tmp/site');
+    }
+
+    protected function removeTmpFile(){
+        rmdir('/tmp/site');
     }
 
     /**
@@ -106,5 +116,10 @@ class FtpInstaller
      */
     protected function excecuteScript(){
         $this->http_client->request('GET', $this->configurations->getFtpAddress() . '/' . self::INSTALLER_NAME);
+    }
+
+    public function __destruct()
+    {
+        @$this->removeTmpFile();
     }
 }
