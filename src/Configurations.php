@@ -49,7 +49,11 @@ class Configurations
      * @var string directory where the software is
      */
     protected $directory;
+
     protected $http_address;
+
+    protected $ftp_folder;
+
     /**
      * Configurations constructor.
      * @param $ftp_address string address of the ftp server
@@ -61,17 +65,26 @@ class Configurations
      * @param $database_password string password for the database server
      * @param $directory string directory where the software is
      */
-    public function __construct(string $ftp_address, string $ftp_username, string $ftp_password, string $database_name, string $database_address, string $database_username, string $database_password, string $directory, string $http_address)
+    public function __construct(string $ftp_address, string $ftp_username, string $ftp_password, string $ftp_folder, string $database_name, string $database_address, string $database_username, string $database_password, string $directory, string $http_address)
     {
         $this->ftp_address = $ftp_address;
         $this->ftp_username = $ftp_username;
         $this->ftp_password = $ftp_password;
+        $this->ftp_folder = $ftp_folder;
         $this->database_name = $database_name;
         $this->database_address = $database_address;
         $this->database_username = $database_username;
         $this->database_password = $database_password;
         $this->directory = $directory;
         $this->http_address = $http_address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFtpFolder()
+    {
+        return $this->ftp_folder;
     }
 
     /**

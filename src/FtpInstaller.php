@@ -42,7 +42,7 @@ class FtpInstaller
     public function __construct(Configurations $configurations)
     {
         $this->zipper = new Zipper();
-        $this->ftp_handler = new FtpClient($this->configurations->getFtpAddress(), $this->configurations->getFtpUsername(), $this->configurations->getFtpPassword());
+        $this->ftp_handler = new FtpClient($this->configurations->getFtpAddress(), $this->configurations->getFtpUsername(), $this->configurations->getFtpPassword(), null, $this->configurations->getFtpFolder());
         $this->http_client=  new Client();
         $this->configurations_writer = new ConfigurationsWriter($configurations);
         $this->configurations = $configurations;
