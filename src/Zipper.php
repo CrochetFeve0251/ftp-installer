@@ -49,7 +49,7 @@ class Zipper
         $dirName = $pathInfo['basename'];
 
         $z = new ZipArchive();
-        $z->open($outZipPath, \ZIPARCHIVE::CREATE);
+        $z->open($outZipPath, \ZIPARCHIVE::CREATE  | \ZIPARCHIVE::OVERWRITE);
         $z->addEmptyDir($dirName);
         self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
         $z->close();

@@ -41,11 +41,11 @@ class FtpInstaller
      */
     public function __construct(Configurations $configurations)
     {
+        $this->configurations = $configurations;
         $this->zipper = new Zipper();
         $this->ftp_handler = new FtpClient($this->configurations->getFtpAddress(), $this->configurations->getFtpUsername(), $this->configurations->getFtpPassword(), null, $this->configurations->getFtpFolder());
         $this->http_client=  new Client();
         $this->configurations_writer = new ConfigurationsWriter($configurations);
-        $this->configurations = $configurations;
     }
 
     /**
@@ -65,7 +65,7 @@ class FtpInstaller
      */
     protected function zip(){
         try{
-            $this->zipper->zipDir($this->configurations->getDirectory(),$this->configurations->getDirectory() . self::ZIP_NAME);
+            $this->zipper->zipDir('/tmp/site', '/tmp/site/' . self::ZIP_NAME);
         }catch (\Exception $exception){
             throw new ZipException();
         }
@@ -89,7 +89,7 @@ class FtpInstaller
 
     protected function copyFile(){
         $this->xcopy($this->configurations->getDirectory(), '/tmp/site');
-        copy(__DIR__ . '/installer.php', 'tmp/site/installer.php');
+        copy(__DIR__ . '/installer.php', '/tmp/site/installer.php');
     }
 
     protected function removeTmpFile(){
