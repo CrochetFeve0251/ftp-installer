@@ -50,7 +50,6 @@ class Zipper
 
         $z = new ZipArchive();
         $z->open($outZipPath, \ZIPARCHIVE::CREATE  | \ZIPARCHIVE::OVERWRITE);
-        $z->addEmptyDir($dirName);
         self::folderToZip($sourcePath, $z, strlen("$sourcePath/"));
         $z->close();
     }
