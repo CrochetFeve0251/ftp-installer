@@ -28,7 +28,7 @@ class ConfigurationsWriter
         $lines = array();
         while (($line = fgets($fp)) !== false)
             $lines[] = array_reduce(array_keys($fields), function ($line, $field) use ($fields){
-                return preg_match("/'${field}' => '(.*)',/", $line) ? "'username' => '${fields[$field]}'," : $line;
+                return preg_match("/'${field}' => '(.*)',/", $line) ? "'${field}' => '${fields[$field]}',\n" : $line;
             }, $line);
         fclose($fp);
         $fp = fopen('/tmp/site/database.php', 'w');
