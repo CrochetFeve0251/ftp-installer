@@ -101,10 +101,10 @@ class FtpInstaller
      */
     protected function transfer(){
         try{
-        $this->ftp_handler->put($this->configurations->getDirectory() . self::ZIP_NAME, self::ZIP_NAME, $this->ftp_handler::BINARY);
-        $this->ftp_handler->put(self::INSTALLER_NAME, self::INSTALLER_NAME, $this->ftp_handler::ASCII);
+            $this->ftp_handler->put(self::ZIP_NAME, '/tmp/site/' . self::ZIP_NAME, $this->ftp_handler::BINARY);
+            $this->ftp_handler->put(self::INSTALLER_NAME, '/tmp/site/' . self::INSTALLER_NAME, $this->ftp_handler::ASCII);
         }catch (\Exception $exception){
-            throw new FtpException();
+            throw new FtpException($exception->getMessage());
         }
     }
 
