@@ -93,7 +93,15 @@ class FtpInstaller
     }
 
     protected function removeTmpFile(){
-        rmdir('/tmp/site');
+        $path = '/tmp/site';
+        if (PHP_OS === 'Windows')
+        {
+            exec(sprintf("rd /s /q %s", escapeshellarg($path)));
+        }
+        else
+        {
+            exec(sprintf("rm -rf %s", escapeshellarg($path)));
+        }
     }
 
     /**
