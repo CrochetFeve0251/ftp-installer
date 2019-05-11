@@ -84,12 +84,8 @@ class DBInjector{
     public function importSQLFile(string $name){
         if(! is_file($name))
             throw new \Exception("The sql file is not valid");
-        $fp = fopen($name, 'r');
-
-        while (($line = stream_get_line($fp, 0, ';')) !== false)
-            $this->db->exec($line);
-        fclose($fp);
-
+        $sql = file_get_contents($name);
+        $this->db->exec($sql);
     }
 }
 

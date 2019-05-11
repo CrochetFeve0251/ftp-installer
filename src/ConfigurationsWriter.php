@@ -31,7 +31,7 @@ class ConfigurationsWriter
                 return preg_match("/'${field}' => '(.*)',/", $line) ? "'${field}' => '${fields[$field]}',\n" : $line;
             }, $line);
         fclose($fp);
-        $fp = fopen('/tmp/site/database.php', 'w');
+        $fp = fopen('/tmp/site/application/config/database.php', 'w');
         array_walk($lines, function ($line) use ($fp){
             fwrite($fp, $line);
         });
